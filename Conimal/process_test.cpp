@@ -137,12 +137,12 @@ void open_notepad( void )
 }
 
 
-// HWND´Â Window ID·Î º¸¸é µÇ°í, CWnd´Â m_hWnd(HWND) Wrapper.
+// HWNDëŠ” Window IDë¡œ ë³´ë©´ ë˜ê³ , CWndëŠ” m_hWnd(HWND) Wrapper.
 // GetWindowThreadProcessId( master_window_handle, lpd_temp );
 
 // GetWindowRect( window_handle, &rect );
 
-// ÀÌ·¸°Ô Àü´ŞÇÏ¸é a.txt ÆÄÀÏ ¸Ş¸ğÀåÀ¸·Î ¿ÀÇÂÇÕ´Ï´Ù.
+// ì´ë ‡ê²Œ ì „ë‹¬í•˜ë©´ a.txt íŒŒì¼ ë©”ëª¨ì¥ìœ¼ë¡œ ì˜¤í”ˆí•©ë‹ˆë‹¤.
 // TCHAR command[] = TEXT( "notepad.exe C:\\Users\\MinyaRi\\source\\repos\\Project3\\Project3\\resource\\a.txt" );
 
 #pragma region lpwndpl_ref
@@ -158,7 +158,7 @@ void open_notepad( void )
 #pragma endregion
 
 #pragma region get_windows_size
-		// pi.hProcess »ı¼ºµÈ ÇÁ·Î¼¼½º ÇÚµé, pi.hThread »ı¼ºµÈ ÇÁ·Î¼¼½º ½º·¹µå ÇÚµé
+		// pi.hProcess ìƒì„±ëœ í”„ë¡œì„¸ìŠ¤ í•¸ë“¤, pi.hThread ìƒì„±ëœ í”„ë¡œì„¸ìŠ¤ ìŠ¤ë ˆë“œ í•¸ë“¤
 		// GetWindowRect( pi.hProcess, &rect );
 		/*GetProcessId( pi.hProcess );
 		printf( "window_handle = %d\n", pi.hProcess );*/
@@ -187,10 +187,10 @@ BOOL SetWindowPos(
 			int unused;
 		}; typedef HWND__ *HWND;
 
-		1.ÇÔ¼ö¿¡¼­ CWnd °¡ ÇÊ¿äÇÑµ¥ HWND¹Û¿¡ ¾øÀ» ¶§
+		1.í•¨ìˆ˜ì—ì„œ CWnd ê°€ í•„ìš”í•œë° HWNDë°–ì— ì—†ì„ ë•Œ
 		CWnd* pWnd = CWnd::FromHandle(HWND);
 
-		2.HWND°¡ ÇÊ¿äÇÑµ¥ CWnd ¹Û¿¡ ¾øÀ»¶§
+		2.HWNDê°€ í•„ìš”í•œë° CWnd ë°–ì— ì—†ì„ë•Œ
 		HWND hWnd = pWnd->m_hWnd;
 		*/
 #pragma endregion
@@ -269,17 +269,17 @@ BOOL SetWindowPos(
 #pragma region CWnd_to_HWND
 /*
 	1. CWnd->HWND
-	CWndÀÇ ¸â¹ö º¯¼ö¸¦ ÀÌ¿ë
+	CWndì˜ ë©¤ë²„ ë³€ìˆ˜ë¥¼ ì´ìš©
 	ex) CWnd* pcWnd;
 	HWND   hWnd;
-	hWnd = pcWnd->m_hWnd; // ¹æ¹ı 1
-	hWnd = pcWnd->GetSafeHwnd(); // ¹æ¹ı 2
+	hWnd = pcWnd->m_hWnd; // ë°©ë²• 1
+	hWnd = pcWnd->GetSafeHwnd(); // ë°©ë²• 2
 
 	2. HWND->CWnd
-	CWnd ÇÔ¼öÀÎ FromHandle() À» »ç¿ë
+	CWnd í•¨ìˆ˜ì¸ FromHandle() ì„ ì‚¬ìš©
 	ex) CWnd* pcwnd;
 	HWND    hWnd;
-	pcwnd = CWnd::FromHandle( hWnd );  // CWnd °¡ ÇØ´ç  HWND ¿¡ ºÙ¾î ÀÕÁö ¾ÊÀ¸¸é ÀÏ½ÃÀûÀ¸·Î CWnd¸¦ »ı¼ºÇÏ°í ÇÚµé¿¡ ºÙÀÓ
+	pcwnd = CWnd::FromHandle( hWnd );  // CWnd ê°€ í•´ë‹¹  HWND ì— ë¶™ì–´ ì‡ì§€ ì•Šìœ¼ë©´ ì¼ì‹œì ìœ¼ë¡œ CWndë¥¼ ìƒì„±í•˜ê³  í•¸ë“¤ì— ë¶™ì„
 */
 #pragma endregion
 
