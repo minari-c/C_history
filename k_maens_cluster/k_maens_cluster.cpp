@@ -1,41 +1,41 @@
 #include <iostream>
-#include <fstream>	// ÆÄÀÏ 
+#include <fstream>	// íŒŒì¼ 
 #include <string>	// string class
-#include <cmath>	// ºÎµ¿¼Ò¼ö ¿¬»ê
-#include <cfloat>	// ºÎµ¿¼Ò¼ö ¿¬»ê
-#include <vector>	// µ¿ÀûÀ¸·Î Å©±â°¡ ÀÚ·á±¸Á¶
+#include <cmath>	// ë¶€ë™ì†Œìˆ˜ ì—°ì‚°
+#include <cfloat>	// ë¶€ë™ì†Œìˆ˜ ì—°ì‚°
+#include <vector>	// ë™ì ìœ¼ë¡œ í¬ê¸°ê°€ ìë£Œêµ¬ì¡°
 
 using namespace std;
 
-// ÇÏ³ªÀÇ Á¡À» Ç¥½ÃÇÏ´Â ±¸Á¶Ã¼
-// long double -> ¼Ò¼öÁ¡ ÀÚ¸®¼ö ¿ÀÂ÷¸¦ ÁÙÀÌ±â À§ÇØ¼­ 
-// ¼Ò¼öÁ¡ ¾Æ·¡ 6ÀÚ¸® Ãâ·Â -> ¼Ò¼öÁ¡ ¾Æ·¡ 7ÀÚ¸®
-// ¼Ò¼öÁ¡ ¿ÀÂ÷¸¦ ÁÙÀÌ±â À§ÇØ¼­ Á¤¹ĞÇÑ °ªÀ» »ç¿ëÇß´Ù. 
+// í•˜ë‚˜ì˜ ì ì„ í‘œì‹œí•˜ëŠ” êµ¬ì¡°ì²´
+// long double -> ì†Œìˆ˜ì  ìë¦¬ìˆ˜ ì˜¤ì°¨ë¥¼ ì¤„ì´ê¸° ìœ„í•´ì„œ 
+// ì†Œìˆ˜ì  ì•„ë˜ 6ìë¦¬ ì¶œë ¥ -> ì†Œìˆ˜ì  ì•„ë˜ 7ìë¦¬
+// ì†Œìˆ˜ì  ì˜¤ì°¨ë¥¼ ì¤„ì´ê¸° ìœ„í•´ì„œ ì •ë°€í•œ ê°’ì„ ì‚¬ìš©í–ˆë‹¤. 
 typedef struct Point {
 	long double x;
 	long double y;
 } P;
 
-// Á¡ Á¤º¸
+// ì  ì •ë³´
 typedef struct Point_info {
-	long double dis;	// Áß½É Á¡°úÀÇ °Å¸®
-	size_t c_num;		// Áß½É Á¡ÀÇ ¹øÈ£
+	long double dis;	// ì¤‘ì‹¬ ì ê³¼ì˜ ê±°ë¦¬
+	size_t c_num;		// ì¤‘ì‹¬ ì ì˜ ë²ˆí˜¸
 }P_info;
 
-// ±ºÁı Á¤º¸
+// êµ°ì§‘ ì •ë³´
 typedef struct Cluster_info {
-	Point center;	// Áß½ÉÁ¡
-	size_t c_size;	// ÇØ´ç ±ºÁıÀÇ Á¡ °³¼ö 
+	Point center;	// ì¤‘ì‹¬ì 
+	size_t c_size;	// í•´ë‹¹ êµ°ì§‘ì˜ ì  ê°œìˆ˜ 
 }C_info;
 
-long double cal_dis( const Point&, const Point& );	// °Å¸® °è»ê
-Point cal_cent( long double, long double, long double );	// Áß½ÉÁ¡ ±¸ÇÏ±â
+long double cal_dis( const Point&, const Point& );	// ê±°ë¦¬ ê³„ì‚°
+Point cal_cent( long double, long double, long double );	// ì¤‘ì‹¬ì  êµ¬í•˜ê¸°
 bool not_change( const Point&, const Point& );				// 1.125125125125125125125125125125 != 1.1
 
 
-vector<P> *points;			// ÀÔ·Â¹ŞÀº Á¡ ¹è¿­
+vector<P> *points;			// ì…ë ¥ë°›ì€ ì  ë°°ì—´
 vector<C_info> *c_info;		// cluster_info
-vector<P_info> *p_infos;	// ³» ±âÁØ °¡Àå °¡±î¿î Á¡°ú °Å¸® ¹è¿­
+vector<P_info> *p_infos;	// ë‚´ ê¸°ì¤€ ê°€ì¥ ê°€ê¹Œìš´ ì ê³¼ ê±°ë¦¬ ë°°ì—´
 
 int main( void )
 {
@@ -45,7 +45,7 @@ int main( void )
 	int input_k;
 	string file_name;
 
-	cout << "ÆÄÀÏ ÀÌ¸§°ú k °ªÀ» ÀÔ·ÂÇÏ¼¼¿ä: ";
+	cout << "íŒŒì¼ ì´ë¦„ê³¼ k ê°’ì„ ì…ë ¥í•˜ì„¸ìš”: ";
 	cin >> file_name >> input_k;
 
 	fout.open( file_name, ios::out );
@@ -66,7 +66,6 @@ int main( void )
 			string f_str = str.substr( 0, str.find( "." ) + 8 );
 			string b_str = str.substr( str.find( " " ), str.find( ".", str.find( " " ) ) - str.find( " " ) + 8 );
 
-			// ¿ÀÂ÷ ÁÙÀÏ ¶§, ¹ö¸², ¹İ¿Ã¸², ¿Ã¸² Áß¿¡ ÇÏ³ª¸¦ ½è´õ´Ï µÆ´Ù.
 			long double f_d = floor( stold( f_str, nullptr ) * 1000000.0l ) / 1000000.0l;
 			long double b_d = floor( stold( b_str, nullptr ) * 1000000.0l ) / 1000000.0l;
 			(*points)[i] = P{ f_d, b_d};
@@ -74,7 +73,7 @@ int main( void )
 		}
 	}
 	
-	cout << "ÃÊ±â Å¬·¯½ºÅÍÀÇ ±¸¼º : \n";
+	cout << "ì´ˆê¸° í´ëŸ¬ìŠ¤í„°ì˜ êµ¬ì„± : \n";
 	(*c_info)[0].center = (*points)[0];
 	for (int i = 1; i < input_k; i += 1)
 	{
@@ -99,7 +98,7 @@ int main( void )
 				(*c_info)[i].center = (*points)[j];
 			}
 		}
-		cout << "\tÅ¬·¯½ºÅÍ " << i << ": Áß½ÉÁ¡ = ";
+		cout << "\tí´ëŸ¬ìŠ¤í„° " << i << ": ì¤‘ì‹¬ì  = ";
 		cout << "(" << (*c_info)[i].center.x << ", " << (*c_info)[i].center.y << "\n";
 	}
 
@@ -157,10 +156,10 @@ int main( void )
 		}
 		if (!is_same)
 		{
-			cout << cnt << "¹øÂ° Å¬·¯½ºÅÍ ±¸¼º:\n";
+			cout << cnt << "ë²ˆì§¸ í´ëŸ¬ìŠ¤í„° êµ¬ì„±:\n";
 			for (int i = 0; i < input_k; i += 1)
 			{
-				cout << "\tÅ¬·¯½ºÅÍ " << i << ": Áß½ÉÁ¡ = ";
+				cout << "\tí´ëŸ¬ìŠ¤í„° " << i << ": ì¤‘ì‹¬ì  = ";
 				cout << "(" << (*c_info)[i].center.x << ", " << (*c_info)[i].center.y << ")" << "\n";
 			}
 			cnt += 1;
@@ -169,11 +168,11 @@ int main( void )
 		delete[] centers;
 		cout << "\n";
 	}
-	cout << "### Å¬·¯½ºÅÍ ±¸¼º ¿Ï·á!! : ¹İº¹ È½¼ö = " << cnt - 1 << "\n";
+	cout << "### í´ëŸ¬ìŠ¤í„° êµ¬ì„± ì™„ë£Œ!! : ë°˜ë³µ íšŸìˆ˜ = " << cnt - 1 << "\n";
 	for (int i = 0; i < input_k; i += 1)
 	{
-		cout << "\tÅ¬·¯½ºÅÍ " << i << ": Áß½ÉÁ¡ = ";
-		cout << "(" << (*c_info)[i].center.x << ", " << (*c_info)[i].center.y << "), point ¼ö = " << (*c_info)[i].c_size << ", ÃÖÀå °Å¸® = " << (*p_max)[i].dis << "\n";
+		cout << "\tí´ëŸ¬ìŠ¤í„° " << i << ": ì¤‘ì‹¬ì  = ";
+		cout << "(" << (*c_info)[i].center.x << ", " << (*c_info)[i].center.y << "), point ìˆ˜ = " << (*c_info)[i].c_size << ", ìµœì¥ ê±°ë¦¬ = " << (*p_max)[i].dis << "\n";
 	}
 
 	delete points;
@@ -194,11 +193,11 @@ Point cal_cent( long double x, long double y, long double size )
 {
 	return Point{
 		ceil( (x / size) * 1000000.0l ) / 1000000.0l,	// 0.1234561238 -> 0.123456
-		ceil( (y / size) * 1000000.0l ) / 1000000.0l	// ¼Ò¼öÁ¡ ¿ÀÂ÷ Á¦°Å
+		ceil( (y / size) * 1000000.0l ) / 1000000.0l	// ì†Œìˆ˜ì  ì˜¤ì°¨ ì œê±°
 	};
 }
 
 bool not_change( const Point& p1, const Point& p2 )
 {
-	return (abs( p1.x - p2.x ) < DBL_EPSILON) && (abs(p1.y - p2.y) < DBL_EPSILON);	// ºÎµ¿¼Ò¼öÁ¡ ºñ±³ ÀÎÅÍ³İ¿¡¼­ ºÃÀ½
+	return (abs( p1.x - p2.x ) < DBL_EPSILON) && (abs(p1.y - p2.y) < DBL_EPSILON);
 }
