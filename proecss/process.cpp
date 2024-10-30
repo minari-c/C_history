@@ -12,17 +12,17 @@ int _tmain (void)
 	memset(&si, 0, sizeof(si));
 	memset(&pi, 0, sizeof(pi));
 
-	// ¸Ş¸ğÀå ½ÇÇà ¿¹Á¦
+	// ë©”ëª¨ì¥ ì‹¤í–‰ ì˜ˆì œ
 	// TCHAR -> L"" -> wide charter
-	// _T -> À¯´ÏÄÚµå ¹®ÀÚ¿­ define ¿©ºÎ¿¡ µû¶ó¼­ L"", ""·Î ³ª´¶´Ù.
+	// _T -> ìœ ë‹ˆì½”ë“œ ë¬¸ìì—´ define ì—¬ë¶€ì— ë”°ë¼ì„œ L"", ""ë¡œ ë‚˜ë‰œë‹¤.
 	TCHAR command[] = TEXT("notepad.exe");
 
-	// ÀÌ·¸°Ô Àü´ŞÇÏ¸é a.txt ÆÄÀÏ ¸Ş¸ğÀåÀ¸·Î ¿ÀÇÂÇÕ´Ï´Ù.
-	//TCHAR command[] = TEXT("notepad.exe C:\\Users\\Kim\\Desktop\\Àü·«³»¿ë\\a.txt");
+	// ì´ë ‡ê²Œ ì „ë‹¬í•˜ë©´ a.txt íŒŒì¼ ë©”ëª¨ì¥ìœ¼ë¡œ ì˜¤í”ˆí•©ë‹ˆë‹¤.
+	//TCHAR command[] = TEXT("notepad.exe C:\\Users\\Kim\\Desktop\\ì „ëµë‚´ìš©\\a.txt");
 
 	if (CreateProcess(NULL, command, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
 	{
-		// pi.hProcess »ı¼ºµÈ ÇÁ·Î¼¼½º ÇÚµé, pi.hThread »ı¼ºµÈ ÇÁ·Î¼¼½º ½º·¹µå ÇÚµé
+		// pi.hProcess ìƒì„±ëœ í”„ë¡œì„¸ìŠ¤ í•¸ë“¤, pi.hThread ìƒì„±ëœ í”„ë¡œì„¸ìŠ¤ ìŠ¤ë ˆë“œ í•¸ë“¤
 		CloseHandle(pi.hProcess);
 		CloseHandle(pi.hThread);
 	}
